@@ -8,6 +8,7 @@ public class User {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "id")
    private Long id;
 
    @Column(name = "name")
@@ -19,7 +20,13 @@ public class User {
    @Column(name = "email")
    private String email;
 
-   public User() {}
+   @OneToOne
+   @MapsId()
+   private Car car;
+
+   public User() {
+
+   }
    
    public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
@@ -58,4 +65,24 @@ public class User {
    public void setEmail(String email) {
       this.email = email;
    }
+
+   public void setCar(Car car) {
+      System.out.println(car);
+     this.car = car;
+   }
+
+   public Car getCar() {
+      return car;
+   }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", car=" + car +
+                '}';
+    }
 }
