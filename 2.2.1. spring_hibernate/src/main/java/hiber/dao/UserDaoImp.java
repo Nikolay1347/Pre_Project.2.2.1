@@ -24,11 +24,6 @@ public class UserDaoImp implements UserDao {
       sessionFactory.getCurrentSession().save(user);
    }
 
-   @Override
-   public void add(Car car) {
-      sessionFactory.getCurrentSession().save(car);
-   }
-
 
    @Override
    @SuppressWarnings("unchecked")
@@ -39,27 +34,19 @@ public class UserDaoImp implements UserDao {
 
 
    @Override
-   public String hql(String model, int series) {
+   public List<User> hql(String model, int series) {
 
-      String firstName = "";
-      String lastName = "";
-      String email = "";
-
-      String HQL2="select firstName, lastName, email from User user " +
+      String hql="select user from User user " +
               "where user.car.model =:model and user.car.series = :series";
 
-      List<Object[]> result = sessionFactory
+      List<User> result = sessionFactory
               .getCurrentSession()
-              .createQuery(HQL2, Object[].class)
+              .createQuery(hql, User.class)
               .setParameter("model", model)
               .setParameter("series", series)
               .getResultList();
-      for (Object[] u : result) {
-         firstName = "firstName  = " + ((String) u[0]);
-         lastName = "lastName  = " + ((String) u[1]);
-         email = "email = " + ((String) u[2]);
-      }
-      return  firstName + "\n"  + lastName  + "\n" + email;
+
+      return result;
    }
 
 
