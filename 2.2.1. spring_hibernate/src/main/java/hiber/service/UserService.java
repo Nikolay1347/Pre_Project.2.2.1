@@ -10,5 +10,5 @@ public interface UserService {
 
     List<User> listUsers();
 
-    List<User> hql(String model, int series);
+    void hql(String model, int series);
 }

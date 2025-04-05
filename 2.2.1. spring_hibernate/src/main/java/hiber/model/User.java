@@ -1,10 +1,14 @@
 package hiber.model;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "users")
+@Component
 public class User {
 
    @Id
@@ -28,11 +32,10 @@ public class User {
 
    }
    
-   public User(String firstName, String lastName, String email, Car car) {
+   public User(String firstName, String lastName, String email) {
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
-      this.car = car;
    }
 
    public Long getId() {
@@ -67,9 +70,9 @@ public class User {
       this.email = email;
    }
 
+   @Autowired
    public void setCar(Car car) {
-      System.out.println(car);
-     this.car = car;
+      this.car = car;
    }
 
    public Car getCar() {
@@ -92,7 +95,7 @@ public class User {
    }
 
    @Override
-    public String toString() {
+   public String toString() {
         return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
@@ -100,5 +103,5 @@ public class User {
                 ", email='" + email + '\'' +
                 ", car=" + car +
                 '}';
-    }
+   }
 }

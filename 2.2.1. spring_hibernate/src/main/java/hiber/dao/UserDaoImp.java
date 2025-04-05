@@ -16,6 +16,10 @@ import java.util.List;
 @Repository
 public class UserDaoImp implements UserDao {
 
+   private static final String HQL="select id, firstName, lastName, email from User user " +
+           "where user.car.model =:model and user.car.series = :series";
+
+
    @Autowired
    private SessionFactory sessionFactory;
 
@@ -33,22 +37,18 @@ public class UserDaoImp implements UserDao {
    }
 
 
-   @Override
-   public List<User> hql(String model, int series) {
-
-      String hql="select user from User user " +
-              "where user.car.model =:model and user.car.series = :series";
-
-      List<User> result = sessionFactory
-              .getCurrentSession()
-              .createQuery(hql, User.class)
-              .setParameter("model", model)
-              .setParameter("series", series)
-              .getResultList();
-
-      return result;
+   public void hql(String model, int series) {
+   List<Object[]> result = sessionFactory
+           .getCurrentSession()
+           .createQuery(HQL, Object[].class)
+           .setParameter("model", model)
+           .setParameter("series", series)
+           .getResultList();
+      for (Object[] u : result) {
+         System.out.println("Id = " + (Long) u[0]);
+         System.out.println("First Name = " + (String) u[1]);
+         System.out.println("Last Name = " + (String) u[2]);
+         System.out.println("Email = " + (String) u[3]);
+      }
    }
-
-
-
 }

@@ -18,12 +18,21 @@ public class MainApp {
       UserService userService = context.getBean(UserService.class);
 
 
-      userService.add(new User("User1", "Lastname1", "user1@mail.ru"
-              , new Car("Audi", 7)));
 
+      User user2 = context.getBean(User.class);
 
-      userService.add(new User("User2", "Lastname2", "user2@mail.ru"
-              , new Car("Volkswagen", 4)));
+      user2.setFirstName("User1");
+      user2.setLastName("Lastname1");
+      user2.setEmail("user1@mail.ru");
+      user2.setCar(new Car("Audi", 7));
+      userService.add(user2);
+
+      user2.setFirstName("User2");
+      user2.setLastName("Lastname2");
+      user2.setEmail("user2@mail.ru");
+      user2.setCar(new Car("Volkswagen", 4));
+      userService.add(user2);
+
 
 
       List<User> users = userService.listUsers();
@@ -37,7 +46,7 @@ public class MainApp {
          System.out.println();
       }
 
-      System.out.println(userService.hql("Audi", 7));
+      userService.hql("Volkswagen", 4);
 
       context.close();
    }
