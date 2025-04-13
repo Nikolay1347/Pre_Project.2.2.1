@@ -29,8 +29,7 @@ public class UserServiceImp implements UserService {
 
    @Transactional(readOnly = true)
    @Override
-   public void hql(String model, int series) {
-      userDao.hql(model, series);
+   public User getUser(Car car) {
+      return userDao.getUser(car);
    }
-
 }

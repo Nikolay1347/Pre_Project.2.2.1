@@ -10,6 +10,6 @@ public interface UserDao {
 
    List<User> listUsers();
 
-   void hql(String model, int series);
+   User getUser(Car car);
 
 }

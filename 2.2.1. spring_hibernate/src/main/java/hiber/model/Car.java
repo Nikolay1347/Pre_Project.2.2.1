@@ -21,7 +21,7 @@ public class Car {
     @Column(name = "series")
     private int series;
 
-    public Car () {
+    public Car() {
 
     }
 
